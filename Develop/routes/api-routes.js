@@ -29,6 +29,7 @@ router.put("/api/workouts/:id", (req, res) => {
   let id = req.params.id
   db.findOneAndUpdate({_id:id}, {$push: {exercises:req.body}}, {new: true})
   .then(dbWorkout=>{
+    console.log(dbWorkout);
      function totalDuration(){
       let totalDuration =0;
       dbWorkout.exercises.forEach(exercise => {
@@ -37,7 +38,6 @@ router.put("/api/workouts/:id", (req, res) => {
       });
       db.findOneAndUpdate({_id:id}, {totalDuration: totalDuration})
       .then(updatedWorkout=>{
-        console.log(updatedWorkout);
         res.json(updatedWorkout)
       })
       // dbWorkout.totalDuration = totalDuration;
