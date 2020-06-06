@@ -36,7 +36,11 @@ const workoutSchema = new Schema({
         required: "Enter the reps"
       }
     }
-  ]
+  ],
+  totalDuration:{
+    type: Number,
+    default: 0
+  }
 });
 
 const workout = mongoose.model("workout", workoutSchema);

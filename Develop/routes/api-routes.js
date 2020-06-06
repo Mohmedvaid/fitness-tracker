@@ -29,9 +29,27 @@ router.put("/api/workouts/:id", (req, res) => {
   let id = req.params.id
   db.findOneAndUpdate({_id:id}, {$push: {exercises:req.body}}, {new: true})
   .then(dbWorkout=>{
-    console.log(dbWorkout);
-    res.json(dbWorkout);
+     function totalDuration(){
+      let totalDuration =0;
+      dbWorkout.exercises.forEach(exercise => {
+        totalDuration+= exercise.duration
+        return totalDuration;
+      });
+      db.findOneAndUpdate({_id:id}, {totalDuration: totalDuration})
+      .then(updatedWorkout=>{
+        console.log(updatedWorkout);
+        res.json(updatedWorkout)
+      })
+      // dbWorkout.totalDuration = totalDuration;
+      // console.log("dbWorkout Duration in the func: "+ dbWorkout.totalDuration);
+    } 
+
+    totalDuration();
+    // console.log(dbWorkout)
+    // .then(res.json(dbWorkout))
   })
+
+
   .catch(err=>{
     res.json(err)
   })
@@ -40,7 +58,7 @@ router.put("/api/workouts/:id", (req, res) => {
 router.get("/api/workouts/range", (req, res)=>{
   db.find({})
   .then(dbWorkout=>{
-    console.log(dbWorkout);
+    res.json(dbWorkout)
   })
 
 })
@@ -49,45 +67,3 @@ router.get("/api/workouts/range", (req, res)=>{
 module.exports = router
 
 
-
-// app.post("/api/workout/:id", ({body}, res) => {
-//   db.exercise.create(body)
-//     .then(({_id}) => db.exercise.findOneAndUpdate({}, { $push: { exercises: _id } }, { new: true }))
-//     .then(dbLibrary => {
-//       res.json(dbLibrary);
-//     })
-//     .catch(err => {
-//       res.json(err);
-//     });
-// });
-
-// app.get("/api/exercise", (req, res) => {
-//   db.exercise.find({})
-//     .then(dbLibrary => {
-//       res.json(dbLibrary);
-//     })
-//     .catch(err => {
-//       res.json(err);
-//     });
-// });
-
-// app.get("/api/workout", (req, res) => {
-//   db.workout.find({})
-//     .then(dbWorkout => {
-//       res.json(dbWorkout);
-//     })
-//     .catch(err => {
-//       res.json(err);
-//     });
-// });
-
-// app.get("/api/populated", (req, res) => {
-//   db.workout.find({})
-//     .populate("exercises")
-//     .then(dbWorkout => {
-//       res.json(dbWorkout);
-//     })
-//     .catch(err => {
-//       res.json(err);
-//     });
-// });
