@@ -25,16 +25,23 @@ router.get("/api/workouts", (req, res)=>{
     });
 })
 
-router.put("/api/workouts/:id", (req, res)=>{
-    db.findOneAndUpdate({}, { $push: { exercises: req.params.id } }, { new: true })
-    .then(dbWorkout=>{
-      res.json(dbWorkout)
-    })
-
-})
+router.put("/api/workouts/:id", (req, res) => {
+  let id = req.params.id
+  db.findOneAndUpdate({_id:id}, {$push: {exercises:req.body}}, {new: true})
+  .then(dbWorkout=>{
+    console.log(dbWorkout);
+    res.json(dbWorkout);
+  })
+  .catch(err=>{
+    res.json(err)
+  })
+});
 
 router.get("/api/workouts/range", (req, res)=>{
-  
+  db.find({})
+  .then(dbWorkout=>{
+    console.log(dbWorkout);
+  })
 
 })
 
