@@ -1,8 +1,8 @@
 
   # Fitness Tracker
-  <img alt="Fitness Tracker gif" src="Assets/img-3.png" width="70%">
-  <img alt="Fitness Tracker gif" src="Assets/img-2.png" width="70%">
-  <img alt="Fitness Tracker gif" src="Assets/img-1.png" width="70%">
+  <img alt="Fitness Tracker gif" src="assets/img-3.png" width="70%">
+  <img alt="Fitness Tracker gif" src="assets/img-2.png" width="70%">
+  <img alt="Fitness Tracker gif" src="assets/img-1.png" width="70%">
 
   ## Description
   The fitness tracker allows users to create, track and manage workouts/exercises using Chart.js.
