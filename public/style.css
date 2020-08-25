@@ -17,6 +17,8 @@ body {
 }
 
 nav {
+  display: flex !important;
+  justify-content: space-evenly;
   background-color: #5793fd;
   color: #ffffff;
   height: 80px;
